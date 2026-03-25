@@ -4,7 +4,9 @@
       "mcp__Claude_Preview__preview_start",
       "Read(//Users/jacksonberry/creos-agents/**)",
       "Bash(gh auth:*)",
-      "Bash(brew install:*)"
+      "Bash(brew install:*)",
+      "Bash(xargs sed:*)",
+      "Bash(xargs -0 sed -i '' 's|href=\"\"\"\"/signup\"\"\"\"|href=\"\"\"\"https://app.creosapp.com/signup\"\"\"\"|g')"
     ]
   }
 }
