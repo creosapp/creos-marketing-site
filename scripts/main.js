@@ -144,7 +144,7 @@ function showMsg(el, text, type) {
     form.addEventListener('submit', async e => {
       e.preventDefault();
       const email = input.value.trim();
-      if (!email || !email.includes('@')) {
+      if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
         showMsg(msg, 'Please enter a valid email address.', 'error');
         return;
       }
@@ -168,7 +168,7 @@ function showMsg(el, text, type) {
         form.style.display = 'none';
         showMsg(msg, text, 'success');
         if ((res.ok || res.status === 201) && typeof gtag === 'function') {
-          gtag('event', 'sign_up', { method: 'waitlist', email });
+          gtag('event', 'sign_up', { method: 'waitlist' });
         }
       } catch (err) {
         console.error('Network error:', err);
