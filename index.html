@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>creos. — The OS for your creator business</title>
+  <meta name="description" content="A live Media Kit Page backed by a full deal pipeline, brand CRM, and revenue dashboard. Built for creators, photographers, and videographers who get paid to create.">
+  <meta property="og:title" content="creos. — The OS for your creator business">
+  <meta property="og:description" content="A live Media Kit Page backed by a full deal pipeline, brand CRM, and revenue dashboard. Built for creators, photographers, and videographers who get paid to create.">
+  <meta property="og:image" content="https://creosapp.com/og-image.png">
+  <meta property="og:url" content="https://creosapp.com/">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="https://creosapp.com/">
+  <link rel="icon" type="image/png" href="/favicon.png">
+  <link rel="stylesheet" href="/styles/main.css?v=3">
+  <style>
+    /* ── ORBS ── */
+    .orb { position: fixed; border-radius: 50%; pointer-events: none; z-index: 0; filter: blur(100px); opacity: 0.6; }
+    .orb-1 { width: 900px; height: 700px; top: -300px; left: 50%; transform: translateX(-50%); background: radial-gradient(ellipse, rgba(243,202,32,0.055) 0%, transparent 65%); }
+    .orb-2 { width: 600px; height: 600px; top: 50vh; left: -200px; background: radial-gradient(ellipse, rgba(76,175,125,0.04) 0%, transparent 70%); }
+    .orb-3 { width: 600px; height: 600px; top: 70vh; right: -200px; background: radial-gradient(ellipse, rgba(124,156,245,0.035) 0%, transparent 70%); }
+    .nav, .hero-wrap, .dashboard-section, .problem-section, .features-section,
+    .integrations-section, section, footer { position: relative; z-index: 2; }
+
+    /* ── HERO ── */
+    .hero-wrap { padding: 160px 24px 80px; text-align: center; max-width: 860px; margin: 0 auto; }
+    .hero-eyebrow {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-size: 11px; font-weight: 600; letter-spacing: 1.2px; text-transform: uppercase;
+      color: var(--text); margin-bottom: 32px;
+      background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12);
+      padding: 8px 16px; border-radius: 100px; backdrop-filter: blur(8px);
+    }
+    .eyebrow-dot {
+      width: 6px; height: 6px; border-radius: 50%; background: #48B17C;
+      box-shadow: 0 0 10px rgba(76,175,125,1), 0 0 20px rgba(76,175,125,0.4);
+      animation: breathe 2.4s ease-in-out infinite; flex-shrink: 0;
+    }
+    @keyframes breathe { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(0.8)} }
+    .hero-h1 { font-size: clamp(48px, 7vw, 88px); font-weight: 800; line-height: 0.95; letter-spacing: -3px; color: var(--text); margin-bottom: 28px; }
+    .hero-h1 em { font-style: normal; color: var(--accent); }
+    .hero-sub { font-size: 17px; color: var(--muted); line-height: 1.7; max-width: 540px; margin: 0 auto 44px; }
+
+    /* ── PILL FORM ── */
+    .pill-form {
+      display: flex; align-items: center; max-width: 420px; margin: 0 auto 14px;
+      background: var(--surface2); border: 1px solid var(--border);
+      border-radius: 10px; padding: 5px; transition: border-color 0.2s;
+    }
+    .pill-form:focus-within { border-color: rgba(243,202,32,0.3); }
+    .pill-form input {
+      flex: 1; background: none; border: none; outline: none;
+      padding: 10px 14px; font-size: 14px; font-family: inherit; color: var(--text);
+    }
+    .pill-form input::placeholder { color: var(--muted2); }
+    .pill-form button {
+      background: var(--accent); color: #0a0a09; border: none; border-radius: 7px;
+      padding: 10px 20px; font-size: 13px; font-weight: 700; font-family: inherit;
+      cursor: pointer; white-space: nowrap; transition: opacity 0.2s; flex-shrink: 0;
+    }
+    .pill-form button:hover { opacity: 0.85; }
+    .form-note { font-size: 12px; color: var(--muted2); margin-top: 16px; margin-bottom: 48px; }
+    .success-msg { display: none; color: #48B17C; font-size: 13px; font-weight: 600; margin-bottom: 14px; text-align: center; }
+
+    /* Social proof */
+    .social-proof { display: inline-flex; align-items: center; gap: 12px; }
+    .avatars { display: flex; }
+    .av { width: 30px; height: 30px; border-radius: 50%; border: 2px solid var(--bg); display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 800; color: #0a0a09; margin-left: -8px; }
+    .av:first-child { margin-left: 0; }
+    .av1{background:#f3ca20}.av2{background:#4caf7d}.av3{background:#7c9cf5}.av4{background:#e07c6a}.av5{background:#b07cd8}
+    .proof-text { font-size: 12px; color: var(--muted); }
+    .proof-text strong { color: var(--text); font-weight: 600; }
+
+    /* ── DASHBOARD ── */
+    .dashboard-section { padding: 0 40px 0; max-width: 1040px; margin: 0 auto; }
+    .db-chrome { border-radius: 16px; overflow: hidden; border: 1px solid rgba(255,255,255,0.09); box-shadow: 0 0 0 1px rgba(255,255,255,0.04), 0 32px 80px rgba(0,0,0,0.6), 0 80px 160px rgba(0,0,0,0.4); }
+    .db-bar { background: #0A0A09; border-bottom: 1px solid rgba(255,255,255,0.07); padding: 11px 18px; display: flex; align-items: center; justify-content: center; position: relative; }
+    .db-dots { position: absolute; left: 18px; display: flex; gap: 6px; }
+    .db-dots span { width: 10px; height: 10px; border-radius: 50%; }
+    .db-r{background:#ff5f57}.db-y{background:#febc2e}.db-g{background:#28c840}
+    .db-url { font-size: 11px; color: var(--muted); background: rgba(255,255,255,0.04); border: 1px solid var(--border2); border-radius: 5px; padding: 4px 20px; user-select: none; }
+    .db-inner { display: grid; grid-template-columns: 176px 1fr; background: #151413; min-height: 440px; }
+    .db-sidebar { background: #0A0A09; border-right: 1px solid rgba(255,255,255,0.07); padding: 20px 14px; display: flex; flex-direction: column; }
+    .db-logo { font-weight: 800; font-size: 15px; color: var(--text); padding: 0 8px; margin-bottom: 22px; letter-spacing: -0.3px; }
+    .db-logo span { color: var(--accent); }
+    .db-nav { display: flex; flex-direction: column; gap: 1px; flex: 1; }
+    .db-nav-item { font-size: 12px; color: var(--muted); padding: 8px 10px; border-radius: 6px; display: flex; align-items: center; gap: 8px; transition: background 0.15s, color 0.15s; }
+    .db-nav-item.active { background: rgba(255,255,255,0.07); color: #EEEAE6; font-weight: 600; }
+    .db-nav-section { font-size: 8px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--muted2); padding: 8px 8px 2px; opacity: 0.6; }
+    .db-sidebar-foot { margin-top: auto; padding-top: 14px; border-top: 1px solid var(--border); display: flex; align-items: center; gap: 10px; }
+    .db-avatar { width: 28px; height: 28px; border-radius: 50%; background: linear-gradient(135deg, #F2C421, #e8a800); display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 800; color: #0a0a09; flex-shrink: 0; }
+    .db-name { font-size: 12px; font-weight: 600; color: var(--text); }
+    .db-main { padding: 24px; overflow: hidden; }
+    .db-top-row { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 10px; }
+    .db-greeting { font-size: 14px; font-weight: 700; color: #EEEAE6; letter-spacing: -0.02em; }
+    .db-notif { position: relative; width: 28px; height: 28px; background: rgba(255,255,255,0.04); border: 1px solid var(--border); border-radius: 7px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .db-notif-dot { position: absolute; top: 5px; right: 6px; width: 5px; height: 5px; border-radius: 50%; background: var(--accent); border: 1.5px solid var(--surface); }
+    .db-inquiry-banner { display: flex; align-items: center; gap: 10px; padding: 10px 12px; background: rgba(243,202,32,0.06); border: 1px solid rgba(243,202,32,0.18); border-radius: 9px; margin-bottom: 8px; cursor: pointer; }
+    .db-inquiry-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--accent); flex-shrink: 0; box-shadow: 0 0 8px rgba(243,202,32,0.8); }
+    .db-inquiry-title { font-size: 11px; font-weight: 700; color: var(--text); }
+    .db-inquiry-sub { font-size: 10px; color: var(--muted); margin-top: 1px; }
+    .db-inquiry-time { font-size: 9px; color: var(--accent); font-weight: 600; }
+    .db-followup-banner { display: flex; align-items: center; gap: 8px; padding: 8px 12px; background: rgba(124,156,245,0.05); border: 1px solid rgba(124,156,245,0.15); border-radius: 9px; margin-bottom: 8px; }
+    .db-followup-icon { width: 24px; height: 24px; background: rgba(124,156,245,0.12); border-radius: 6px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .db-sub-title { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); margin-bottom: 6px; }
+    .db-quick-actions { display: flex; gap: 5px; margin: 6px 0 10px; }
+    .db-qa-item { display: flex; align-items: center; gap: 5px; font-size: 10px; font-weight: 600; color: var(--muted); background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 5px; padding: 5px 9px; flex: 1; justify-content: center; white-space: nowrap; }
+    .db-qa-accent { color: var(--accent); border-color: rgba(243,202,32,0.2); background: rgba(243,202,32,0.05); }
+    .db-stats { display: grid; grid-template-columns: repeat(2,1fr); gap: 10px; margin-bottom: 14px; }
+    .db-stat { background: rgba(255,255,255,0.025); border: 1px solid rgba(255,255,255,0.04); border-radius: 10px; padding: 14px 16px; }
+    .db-stat-lbl { font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.7px; margin-bottom: 6px; }
+    .db-kit-mini-stats { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+    .db-kit-mini { display: flex; flex-direction: column; }
+    .db-kit-val { font-size: 16px; font-weight: 800; letter-spacing: -0.4px; color: var(--text); }
+    .db-kit-lbl { font-size: 9px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; margin-top: 1px; }
+    .db-kit-note { font-size: 9px; color: #48B17C; margin-top: 2px; }
+    .db-kit-divider { width: 1px; height: 28px; background: var(--border); flex-shrink: 0; }
+    .db-status-item { display: flex; align-items: center; gap: 7px; background: rgba(255,255,255,0.02); border: 1px solid var(--border2); border-radius: 6px; padding: 7px 10px; }
+    .db-status-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+    .db-status-label { font-size: 10px; font-weight: 600; color: var(--text); width: 72px; flex-shrink: 0; }
+    .db-status-bar-wrap { flex: 1; height: 3px; background: rgba(255,255,255,0.04); border-radius: 2px; overflow: hidden; }
+    .db-status-bar { height: 100%; border-radius: 2px; }
+    .db-status-count { font-size: 9px; color: var(--muted); width: 14px; text-align: right; flex-shrink: 0; }
+    .db-status-val { font-size: 10px; font-weight: 700; color: var(--text); width: 40px; text-align: right; flex-shrink: 0; }
+    .db-bottom-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 0; }
+    .db-bottom-col { display: flex; flex-direction: column; }
+    .db-pipeline-status { display: flex; flex-direction: column; gap: 6px; }
+    .db-fade { height: 130px; margin-top: -130px; background: linear-gradient(to bottom, transparent, var(--bg)); position: relative; z-index: 2; }
+
+    /* ── MEDIA KIT MOCKUP ── */
+    .mk-layout { display: grid; grid-template-columns: 210px 1fr; background: #111010; min-height: 720px; }
+    .mk-sidebar { background: #0A0A09; border-right: 1px solid rgba(255,255,255,0.07); padding: 22px 16px; display: flex; flex-direction: column; align-items: center; text-align: center; }
+    .mk-avatar { width: 52px; height: 52px; border-radius: 50%; background: linear-gradient(135deg, #F3C419, #e6a800); display: flex; align-items: center; justify-content: center; font-size: 15px; font-weight: 800; color: #0a0a09; margin-bottom: 10px; flex-shrink: 0; }
+    .mk-name { font-size: 13px; font-weight: 700; color: var(--text); letter-spacing: -0.2px; }
+    .mk-location { font-size: 10px; color: var(--muted); margin-top: 2px; margin-bottom: 14px; }
+    .mk-platforms { width: 100%; display: flex; flex-direction: column; gap: 5px; margin-bottom: 14px; }
+    .mk-platform-item { display: flex; align-items: center; gap: 7px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); border-radius: 6px; padding: 6px 9px; }
+    .mk-plat-icon { color: var(--muted); flex-shrink: 0; }
+    .mk-plat-name { font-size: 10px; color: var(--muted); flex: 1; text-align: left; }
+    .mk-plat-count { font-size: 11px; font-weight: 700; color: var(--text); }
+    .mk-cats-label { font-size: 8px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: var(--muted2); margin-bottom: 7px; text-align: left; width: 100%; }
+    .mk-cats { display: flex; flex-wrap: wrap; gap: 4px; width: 100%; margin-bottom: 14px; }
+    .mk-cat { font-size: 9px; font-weight: 600; border-radius: 20px; padding: 3px 9px; }
+    .mk-cat-y { background: rgba(243,202,32,0.14); color: var(--accent); border: 1px solid rgba(243,202,32,0.28); }
+    .mk-cat-yo { color: var(--accent); border: 1px solid rgba(243,202,32,0.28); }
+    .mk-cat-b { background: rgba(124,156,245,0.14); color: #7c9cf5; border: 1px solid rgba(124,156,245,0.28); }
+    .mk-cat-o { color: var(--muted); border: 1px solid rgba(255,255,255,0.1); }
+    .mk-rates-wrap { width: 100%; background: rgba(243,202,32,0.07); border: 1px solid rgba(243,202,32,0.18); border-radius: 8px; padding: 10px 12px; margin-bottom: 12px; }
+    .mk-rates-label { font-size: 9px; font-weight: 600; color: var(--accent); text-align: left; width: 100%; margin-bottom: 8px; }
+    .mk-rates { width: 100%; display: flex; flex-direction: column; gap: 5px; }
+    .mk-rate-row { display: flex; justify-content: space-between; align-items: center; }
+    .mk-rate-name { font-size: 10px; color: rgba(237,233,227,0.6); }
+    .mk-rate-val { font-size: 11px; font-weight: 700; color: var(--accent); }
+    .mk-enquire { width: 100%; background: var(--accent); color: #0a0a09; font-size: 11px; font-weight: 700; border-radius: 10px; padding: 10px 0; text-align: center; margin-bottom: 12px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 6px; box-sizing: border-box; }
+    .mk-available { font-size: 10px; font-weight: 600; color: #48B17C; margin-top: auto; margin-bottom: 8px; }
+    .mk-powered { font-size: 9px; color: var(--muted2); }
+    .mk-powered span { color: var(--text); font-weight: 700; }
+    .mk-main { display: flex; flex-direction: column; overflow: hidden; }
+    .mk-stats-bar { display: grid; grid-template-columns: repeat(3, 1fr); background: #0a0a09; border-bottom: 1px solid rgba(255,255,255,0.07); }
+    .mk-stat-item { padding: 18px 20px; text-align: center; }
+    .mk-stat-item + .mk-stat-item { border-left: 1px solid rgba(255,255,255,0.07); }
+    .mk-stat-val { font-size: 24px; font-weight: 800; color: var(--text); letter-spacing: -0.5px; line-height: 1; }
+    .mk-stat-lbl { font-size: 8px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.8px; color: var(--muted); margin-top: 4px; }
+    .mk-section { padding: 16px 20px 8px; }
+    .mk-section-label { font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); margin-bottom: 12px; }
+    .mk-demos { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+    .mk-demo-panel { background: rgba(255,255,255,0.025); border: 1px solid rgba(255,255,255,0.05); border-radius: 8px; padding: 12px; }
+    .mk-demo-title { font-size: 8px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--muted2); margin-bottom: 10px; }
+    .mk-bar-row { display: flex; align-items: center; gap: 7px; margin-bottom: 6px; }
+    .mk-bar-label { font-size: 10px; color: var(--muted); width: 34px; flex-shrink: 0; }
+    .mk-bar-label-wide { width: 80px; }
+    .mk-bar-track { flex: 1; height: 3px; background: rgba(255,255,255,0.07); border-radius: 2px; overflow: hidden; }
+    .mk-bar-fill { height: 100%; border-radius: 2px; }
+    .mk-bar-gold { background: var(--accent); }
+    .mk-bar-teal { background: #3DBBA0; }
+    .mk-bar-blue { background: #5B8DEF; }
+    .mk-bar-pct { font-size: 10px; color: var(--text); font-weight: 600; width: 24px; text-align: right; flex-shrink: 0; }
+    .mk-about-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; padding: 8px 20px 14px; }
+    .mk-about-card { background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06); border-radius: 8px; padding: 14px; }
+    .mk-text-block-title { font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--muted2); margin-bottom: 8px; }
+    .mk-text-p { font-size: 10px; color: var(--text); line-height: 1.7; }
+    .mk-testimonials { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; }
+    .mk-testi { background: rgba(255,255,255,0.025); border: 1px solid rgba(255,255,255,0.05); border-radius: 8px; padding: 12px; }
+    .mk-testi-q { font-size: 22px; color: var(--accent); opacity: 0.35; line-height: 1; margin-bottom: 6px; font-family: Georgia, serif; }
+    .mk-testi-text { font-size: 9px; font-style: italic; color: var(--text); line-height: 1.75; margin-bottom: 8px; }
+    .mk-testi-author { font-size: 8px; color: var(--muted2); }
+    .mk-collabs { display: flex; flex-wrap: wrap; gap: 6px; }
+    .mk-collab-chip { font-size: 10px; font-weight: 600; color: var(--text); background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 6px; padding: 5px 12px; }
+
+    /* ── PROBLEM SECTION ── */
+    .problem-section { padding: 80px 24px; max-width: 960px; margin: 0 auto; }
+    .problem-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+    .pi-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 24px 20px; display: flex; flex-direction: column; gap: 14px; transition: border-color 0.2s; }
+    .pi-card:hover { border-color: rgba(255,255,255,0.12); }
+    .pi-icon { width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; background: rgba(224,108,108,0.1); }
+    .pi-icon svg { fill: none; stroke: #DF6B6B; stroke-width: 1.8; }
+    .pi-title { font-size: 13px; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 8px; }
+    .pi-desc { font-size: 12px; color: var(--muted); line-height: 1.6; }
+
+    /* ── FEATURE SECTION LABEL ── */
+    .section-label-accent {
+      font-size: 11px; font-weight: 600; text-transform: uppercase;
+      letter-spacing: 2px; color: var(--accent); display: block;
+      text-align: center; margin-bottom: 16px;
+    }
+    .section-h2 { font-size: clamp(30px, 4vw, 46px); font-weight: 800; letter-spacing: -1.5px; line-height: 1.05; color: var(--text); margin-bottom: 14px; text-align: center; }
+    .section-p { font-size: 15px; color: var(--muted); line-height: 1.7; max-width: 480px; margin: 0 auto; text-align: center; }
+
+    /* ── FEATURE CARDS ── */
+    .features-section { padding: 80px 24px 100px; max-width: 1040px; margin: 0 auto; }
+    .features-header { text-align: center; margin-bottom: 64px; }
+    .features-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+    .fc { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 32px 28px; transition: border-color 0.25s, background 0.25s; }
+    .fc:hover { border-color: rgba(255,255,255,0.12); background: var(--surface2); }
+    .fc-icon { width: 42px; height: 42px; border-radius: 10px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px; }
+    .fc-icon svg { width: 20px; height: 20px; stroke-width: 1.6; fill: none; }
+    .ic-y { background: rgba(243,202,32,0.08); box-shadow: 0 0 20px rgba(243,202,32,0.12); }
+    .ic-y svg { stroke: #f3ca20; filter: drop-shadow(0 0 4px rgba(243,202,32,0.5)); }
+    .ic-b { background: rgba(124,156,245,0.08); box-shadow: 0 0 20px rgba(124,156,245,0.12); }
+    .ic-b svg { stroke: #7c9cf5; filter: drop-shadow(0 0 4px rgba(124,156,245,0.5)); }
+    .ic-p { background: rgba(176,124,216,0.08); box-shadow: 0 0 20px rgba(176,124,216,0.12); }
+    .ic-p svg { stroke: #b07cd8; filter: drop-shadow(0 0 4px rgba(176,124,216,0.5)); }
+    .ic-g { background: rgba(76,175,125,0.08); box-shadow: 0 0 20px rgba(76,175,125,0.12); }
+    .ic-g svg { stroke: #4caf7d; filter: drop-shadow(0 0 4px rgba(76,175,125,0.5)); }
+    .ic-t { background: rgba(56,189,184,0.08); box-shadow: 0 0 20px rgba(56,189,184,0.12); }
+    .ic-t svg { stroke: #38bdb8; filter: drop-shadow(0 0 4px rgba(38,189,184,0.5)); }
+    .ic-o { background: rgba(224,124,106,0.08); box-shadow: 0 0 20px rgba(224,124,106,0.12); }
+    .ic-o svg { stroke: #e07c6a; filter: drop-shadow(0 0 4px rgba(224,124,106,0.5)); }
+    .fc-name { font-size: 15px; font-weight: 700; color: var(--text); margin-bottom: 8px; letter-spacing: -0.2px; }
+    .fc-desc { font-size: 13px; color: var(--muted); line-height: 1.7; }
+
+    /* ── INTEGRATIONS CHIPS ── */
+    .integrations-chip-section { padding: 0 24px 100px; max-width: 600px; margin: 0 auto; text-align: center; }
+    .integrations-chip-label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 2px; color: var(--muted); margin-bottom: 32px; display: block; }
+    .chips-grid { display: grid; grid-template-columns: repeat(4, auto); justify-content: center; gap: 10px; }
+    .chip { display: flex; align-items: center; justify-content: center; gap: 8px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07); border-radius: 10px; padding: 12px 20px; transition: border-color 0.2s, background 0.2s; }
+    .chip:hover { background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.14); }
+    .chip img { width: 20px; height: 20px; flex-shrink: 0; filter: brightness(0) invert(1) opacity(0.7); }
+    .chip-name { font-size: 13px; font-weight: 600; color: var(--text); white-space: nowrap; }
+
+    /* ── FAQ (+ icon) ── */
+    .faq-plus { flex-shrink: 0; transition: transform 0.2s ease; color: var(--muted); }
+    .faq-item.open .faq-plus { transform: rotate(45deg); }
+
+    /* ── FINAL CTA ── */
+    .final-cta { padding: 80px 24px 120px; text-align: center; max-width: 680px; margin: 0 auto; }
+    .final-h2 { font-size: clamp(34px, 5.5vw, 62px); font-weight: 800; letter-spacing: -2px; line-height: 1.0; color: var(--text); margin-bottom: 18px; }
+    .final-h2 em { font-style: normal; color: var(--accent); }
+    .final-p { font-size: 15px; color: var(--muted); margin-bottom: 36px; line-height: 1.7; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .hero-wrap { padding: 120px 20px 60px; }
+      .hero-h1 { letter-spacing: -2px; }
+      .dashboard-section { padding: 0 16px; }
+      .db-sidebar { display: none; }
+      .db-inner { grid-template-columns: 1fr; }
+      .mk-layout { grid-template-columns: 1fr; min-height: 0; }
+      .mk-sidebar { display: flex; width: 100%; padding: 36px 24px 28px; }
+      .mk-main { display: none; }
+      .mk-avatar { width: 88px; height: 88px; font-size: 24px; margin-bottom: 16px; }
+      .mk-name { font-size: 20px; font-weight: 800; }
+      .mk-location { font-size: 13px; margin-bottom: 24px; }
+      .mk-platforms { gap: 8px; margin-bottom: 24px; }
+      .mk-platform-item { padding: 12px 16px; border-radius: 10px; }
+      .mk-plat-name { font-size: 14px; font-weight: 600; color: var(--text); }
+      .mk-plat-count { font-size: 15px; }
+      .mk-cats-label { text-align: center; font-size: 10px; margin-bottom: 12px; }
+      .mk-cats { justify-content: center; gap: 8px; margin-bottom: 24px; }
+      .mk-cat { font-size: 12px; padding: 5px 14px; }
+      .mk-rates-wrap { background: rgba(255,255,255,0.04); border-color: rgba(255,255,255,0.1); padding: 16px; margin-bottom: 16px; }
+      .mk-rates-label { text-align: center; font-size: 11px; color: var(--muted); margin-bottom: 12px; }
+      .mk-rates { gap: 10px; }
+      .mk-rate-name { font-size: 13px; }
+      .mk-rate-val { font-size: 14px; }
+      .mk-enquire { font-size: 14px; font-weight: 700; padding: 16px; border-radius: 12px; gap: 8px; margin-bottom: 0; }
+      .mk-enquire svg { width: 15px; height: 15px; }
+      .mk-available { font-size: 12px; margin-top: 16px; margin-bottom: 12px; }
+      .mk-powered { font-size: 11px; }
+      .mk-demos { grid-template-columns: 1fr; }
+      .problem-grid { grid-template-columns: repeat(2, 1fr); }
+      .pi-desc { display: none; }
+      .features-grid { grid-template-columns: 1fr; }
+      .chips-grid { display: flex; flex-wrap: wrap; justify-content: center; }
+    }
+    @media (max-width: 480px) {
+      .hero-h1 { font-size: 36px; letter-spacing: -2px; }
+      .db-stats { grid-template-columns: 1fr; }
+      .db-bottom-row { grid-template-columns: 1fr; }
+      .pill-form { flex-direction: column; background: none; border: none; padding: 0; gap: 10px; }
+      .pill-form input { width: 100%; padding: 14px 16px; background: var(--surface2); border: 1px solid var(--border); border-radius: 10px; box-sizing: border-box; }
+      .pill-form button { width: 100%; border-radius: 10px; padding: 14px 20px; font-size: 15px; }
+    }
+  </style>
+  <!-- GA4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-JPCE036FQE"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-JPCE036FQE');
+  </script>
+</head>
+<body>
+
+  <!-- Ambient glow orbs -->
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+
+  <!-- NAV -->
+  <nav class="nav" id="nav">
+    <div class="nav-inner">
+      <a href="/" class="nav-logo">creos<span>.</span></a>
+      <div class="nav-links">
+        <a href="/features.html">Features</a>
+      </div>
+      <div class="nav-actions">
+        <div class="nav-divider"></div>
+        <a href="https://app.creosapp.com" class="nav-login" target="_blank" rel="noopener">Login</a>
+        <a href="/signup" class="btn">Get Started</a>
+      </div>
+      <button class="nav-hamburger" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+  <div class="nav-overlay"></div>
+  <div class="nav-mobile">
+    <a href="/features.html">Features</a>
+    <a href="https://app.creosapp.com" target="_blank" rel="noopener">Login</a>
+    <a href="/signup" class="btn">Get Started</a>
+  </div>
+
+  <!-- HERO -->
+  <div class="hero-wrap" id="waitlist">
+    <div class="hero-eyebrow">
+      <span class="eyebrow-dot"></span>
+      Sign up free — no credit card needed &nbsp;→
+    </div>
+    <h1 class="hero-h1">Stop sending your<br> <em>rates in a DM.</em></h1>
+    <p class="hero-sub">Your media kit, brand deals, client contacts, and income — all in one place. Built for creators, photographers, and videographers.</p>
+
+    <a href="/signup" class="btn btn-lg hero-cta-btn">Get Started Free</a>
+    <p class="form-note">Free to start · No credit card · Cancel anytime</p>
+
+    <div class="social-proof">
+      <div class="avatars">
+        <div class="av av1">JB</div>
+        <div class="av av2">SK</div>
+        <div class="av av3">ML</div>
+        <div class="av av4">PR</div>
+        <div class="av av5">TW</div>
+      </div>
+      <p class="proof-text">Join creators already in early access</p>
+    </div>
+  </div>
+
+  <!-- MEDIA KIT MOCKUP -->
+  <div class="dashboard-section reveal">
+    <div class="db-chrome">
+      <div class="db-bar">
+        <div class="db-dots">
+          <span class="db-r"></span><span class="db-y"></span><span class="db-g"></span>
+        </div>
+        <div class="db-url">alex.creosapp.com</div>
+      </div>
+      <div class="mk-layout">
+
+        <!-- Profile Sidebar -->
+        <div class="mk-sidebar">
+          <div class="mk-avatar">AR</div>
+          <div class="mk-name">Alex Rivera</div>
+          <div class="mk-location">Sydney, Australia</div>
+
+          <div class="mk-platforms">
+            <div class="mk-platform-item">
+              <svg class="mk-plat-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+              <span class="mk-plat-name">Instagram</span>
+              <span class="mk-plat-count">48.4K</span>
+            </div>
+            <div class="mk-platform-item">
+              <svg class="mk-plat-icon" width="11" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.27 6.27 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.71a8.18 8.18 0 004.77 1.52V6.79a4.85 4.85 0 01-1-.1z"/></svg>
+              <span class="mk-plat-name">TikTok</span>
+              <span class="mk-plat-count">22.8K</span>
+            </div>
+            <div class="mk-platform-item">
+              <svg class="mk-plat-icon" width="13" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22.54 6.42a2.78 2.78 0 00-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 00-1.95 1.96A29 29 0 001 12a29 29 0 00.46 5.58A2.78 2.78 0 003.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 001.95-1.95A29 29 0 0023 12a29 29 0 00-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="currentColor"/></svg>
+              <span class="mk-plat-name">YouTube</span>
+              <span class="mk-plat-count">8,100</span>
+            </div>
+          </div>
+
+          <div class="mk-cats-label">Content Categories</div>
+          <div class="mk-cats">
+            <span class="mk-cat mk-cat-y">Videography</span>
+            <span class="mk-cat mk-cat-yo">Lifestyle</span>
+            <span class="mk-cat mk-cat-b">Photography</span>
+            <span class="mk-cat mk-cat-o">Travel</span>
+          </div>
+
+          <div class="mk-rates-wrap">
+            <div class="mk-rates-label">Rates</div>
+            <div class="mk-rates">
+              <div class="mk-rate-row"><span class="mk-rate-name">Day Rate</span><span class="mk-rate-val">A$3,200</span></div>
+              <div class="mk-rate-row"><span class="mk-rate-name">Reel</span><span class="mk-rate-val">A$1,400</span></div>
+              <div class="mk-rate-row"><span class="mk-rate-name">Post</span><span class="mk-rate-val">A$680</span></div>
+              <div class="mk-rate-row"><span class="mk-rate-name">Story</span><span class="mk-rate-val">A$280</span></div>
+              <div class="mk-rate-row"><span class="mk-rate-name">UGC</span><span class="mk-rate-val">A$950</span></div>
+              <div class="mk-rate-row"><span class="mk-rate-name">Campaign</span><span class="mk-rate-val">A$4,800</span></div>
+            </div>
+          </div>
+
+          <div class="mk-enquire">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#0a0a09" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+            Send Enquiry
+          </div>
+          <div class="mk-available">● Available now</div>
+          <div class="mk-powered">Powered by <span>creos.</span></div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="mk-main">
+
+          <!-- Top Stats -->
+          <div class="mk-stats-bar">
+            <div class="mk-stat-item">
+              <div class="mk-stat-val">79.3K</div>
+              <div class="mk-stat-lbl">Total Followers</div>
+            </div>
+            <div class="mk-stat-item">
+              <div class="mk-stat-val">4.7%</div>
+              <div class="mk-stat-lbl">Avg Engagement Rate</div>
+            </div>
+            <div class="mk-stat-item">
+              <div class="mk-stat-val">38.1K</div>
+              <div class="mk-stat-lbl">Avg Reach</div>
+            </div>
+          </div>
+
+          <!-- Audience Demographics -->
+          <div class="mk-section">
+            <div class="mk-section-label">Audience Demographics</div>
+            <div class="mk-demos">
+              <div class="mk-demo-panel">
+                <div class="mk-demo-title">Age Range</div>
+                <div class="mk-bar-row"><span class="mk-bar-label">25–34</span><div class="mk-bar-track"><div class="mk-bar-fill mk-bar-gold" style="width:88%"></div></div><span class="mk-bar-pct">44%</span></div>
+                <div class="mk-bar-row"><span class="mk-bar-label">18–24</span><div class="mk-bar-track"><div class="mk-bar-fill mk-bar-gold" style="width:56%"></div></div><span class="mk-bar-pct">28%</span></div>
+                <div class="mk-bar-row"><span class="mk-bar-label">35–44</span><div class="mk-bar-track"><div class="mk-bar-fill mk-bar-gold" style="width:38%"></div></div><span class="mk-bar-pct">19%</span></div>
+                <div class="mk-bar-row"><span class="mk-bar-label">45+</span><div class="mk-bar-track"><div class="mk-bar-fill mk-bar-gold" style="width:18%"></div></div><span class="mk-bar-pct">9%</span></div>
+              </div>
+              <div class="mk-demo-panel">
+                <div class="mk-demo-title">Gender</div>
+                <div class="mk-bar-row"><span class="mk-bar-label">Male</span><div class="mk-bar-track"><div class="mk-bar-fill mk-bar-teal" style="width:68%"></div></div><span class="mk-bar-pct">68%</span></div>
+                <div class="mk-bar-row"><span class="mk-bar-label">Female</span><div class="mk-bar-track"><div class="mk-bar-fill mk-bar-teal" style="width:32%"></div></div><span class="mk-bar-pct">32%</span></div>
+              </div>
+              <div class="mk-demo-panel">
+                <div class="mk-demo-title">Top Locations</div>
+                <div class="mk-bar-row"><span class="mk-bar-label mk-bar-label-wide">Australia</span><div class="mk-bar-track"><div class="mk-bar-fill mk-bar-blue" style="width:76%"></div></div><span class="mk-bar-pct">38%</span></div>
+                <div class="mk-bar-row"><span class="mk-bar-label mk-bar-label-wide">United States</span><div class="mk-bar-track"><div class="mk-bar-fill mk-bar-blue" style="width:52%"></div></div><span class="mk-bar-pct">26%</span></div>
+                <div class="mk-bar-row"><span class="mk-bar-label mk-bar-label-wide">United Kingdom</span><div class="mk-bar-track"><div class="mk-bar-fill mk-bar-blue" style="width:32%"></div></div><span class="mk-bar-pct">16%</span></div>
+                <div class="mk-bar-row"><span class="mk-bar-label mk-bar-label-wide">New Zealand</span><div class="mk-bar-track"><div class="mk-bar-fill mk-bar-blue" style="width:16%"></div></div><span class="mk-bar-pct">8%</span></div>
+                <div class="mk-bar-row"><span class="mk-bar-label mk-bar-label-wide">Canada</span><div class="mk-bar-track"><div class="mk-bar-fill mk-bar-blue" style="width:12%"></div></div><span class="mk-bar-pct">6%</span></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- About + Brand Fit -->
+          <div class="mk-about-cols">
+            <div class="mk-about-card">
+              <div class="mk-text-block-title">About</div>
+              <p class="mk-text-p">Sydney-based videographer and content creator with a background in commercial production and lifestyle content. I specialise in short-form video, brand storytelling, and campaign content for labels that care about doing it properly. Over five years working with brands across automotive, fitness, lifestyle, and tech — from concept through to delivery.</p>
+            </div>
+            <div class="mk-about-card">
+              <div class="mk-text-block-title">Brand Fit</div>
+              <p class="mk-text-p">I work best with brands that have a clear visual identity and aren't afraid to let the content breathe. My audience skews 25–44, predominantly male, with strong representation across Australia, the US, and the UK — active, aspirational, and commercially engaged. If you want content that looks intentional rather than assembled, let's talk.</p>
+            </div>
+          </div>
+
+          <!-- What Brands Say -->
+          <div class="mk-section">
+            <div class="mk-section-label">What Brands Say</div>
+            <div class="mk-testimonials">
+              <div class="mk-testi">
+                <div class="mk-testi-q">"</div>
+                <p class="mk-testi-text">Alex brought a level of creative direction we rarely see from independent creators. The content performed well above our benchmark across every metric. We'll absolutely be back.</p>
+                <div class="mk-testi-author">— Jamie Chen, Brand Partnerships Manager, Hyundai Australia</div>
+              </div>
+              <div class="mk-testi">
+                <div class="mk-testi-q">"</div>
+                <p class="mk-testi-text">Working with Alex was seamless from brief to delivery. He understood the brief immediately, pushed back on one thing that made the final product genuinely better, and turned it around faster than anyone on our roster.</p>
+                <div class="mk-testi-author">— Sarah Mitchell, Influencer Marketing Lead, Gymshark</div>
+              </div>
+              <div class="mk-testi">
+                <div class="mk-testi-q">"</div>
+                <p class="mk-testi-text">We needed someone who could make our tools look beautiful in context. Alex nailed it. The reel he produced became one of our top-performing organic posts in AU for the quarter.</p>
+                <div class="mk-testi-author">— Tom Hargreaves, Content Marketing, Adobe ANZ</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Past Collaborations -->
+          <div class="mk-section">
+            <div class="mk-section-label">Past Collaborations</div>
+            <div class="mk-collabs">
+              <span class="mk-collab-chip">Hyundai Australia</span>
+              <span class="mk-collab-chip">Gymshark</span>
+              <span class="mk-collab-chip">Adobe</span>
+              <span class="mk-collab-chip">Aesop</span>
+              <span class="mk-collab-chip">Red Bull</span>
+              <span class="mk-collab-chip">Moment Lenses</span>
+              <span class="mk-collab-chip">Bellroy</span>
+              <span class="mk-collab-chip">Surfstitch</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <div class="db-fade"></div>
+  </div>
+
+  <!-- PROBLEM -->
+  <section class="problem-section reveal">
+    <div style="text-align:center;margin-bottom:48px;">
+      <span class="section-label-accent">The problem</span>
+      <h2 class="section-h2" style="margin-top:12px;">Sound familiar?</h2>
+      <p class="section-p">You're running a real business. Just not with the right tools.</p>
+    </div>
+    <div class="problem-grid">
+      <div class="pi-card">
+        <div class="pi-icon"><svg viewBox="0 0 24 24" width="18" height="18"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="15" y2="17"/></svg></div>
+        <div><div class="pi-title">Sending PDFs as your media kit</div><div class="pi-desc">Outdated the moment you hit send. No analytics, no inquiry form, no easy updates.</div></div>
+      </div>
+      <div class="pi-card">
+        <div class="pi-icon"><svg viewBox="0 0 24 24" width="18" height="18"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+        <div><div class="pi-title">Managing work through DMs</div><div class="pi-desc">Enquiries buried in your inbox. No pipeline, no tracking, no follow-up system.</div></div>
+      </div>
+      <div class="pi-card">
+        <div class="pi-icon"><svg viewBox="0 0 24 24" width="18" height="18"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg></div>
+        <div><div class="pi-title">Revenue tracked in a spreadsheet</div><div class="pi-desc">No totals, no YTD. You couldn't tell someone what you earned last quarter.</div></div>
+      </div>
+      <div class="pi-card">
+        <div class="pi-icon"><svg viewBox="0 0 24 24" width="18" height="18"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg></div>
+        <div><div class="pi-title">Deals dying from no follow-up</div><div class="pi-desc">Work stalls because life got busy. Money left on the table every single week.</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="hiw-section reveal">
+    <div style="text-align:center;margin-bottom:56px;">
+      <span class="section-label-accent">How it works</span>
+      <h2 class="section-h2" style="margin-top:12px;">Up and running<br>in minutes.</h2>
+      <p class="section-p">No complicated setup. Just input your stats, add your rates, and share your link.</p>
+    </div>
+    <div class="hiw-steps">
+      <div class="hiw-step">
+        <div class="hiw-num">1</div>
+        <div class="hiw-connector"></div>
+        <div class="hiw-content">
+          <div class="hiw-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="22" height="22"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+          </div>
+          <h3 class="hiw-title">Build your Media Kit</h3>
+          <p class="hiw-desc">Set up your page at yourname.creosapp.com in minutes. Add your stats, past brand work, services, and rates. Brands can enquire directly from your page.</p>
+        </div>
+      </div>
+      <div class="hiw-step">
+        <div class="hiw-num">2</div>
+        <div class="hiw-connector"></div>
+        <div class="hiw-content">
+          <div class="hiw-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="22" height="22"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/><path d="M9 12h6M9 16h4"/></svg>
+          </div>
+          <h3 class="hiw-title">Manage your deals</h3>
+          <p class="hiw-desc">Every enquiry lands in your pipeline. Move deals from first message to payment, set follow-up reminders, and keep all your brand contacts in one place.</p>
+        </div>
+      </div>
+      <div class="hiw-step">
+        <div class="hiw-num">3</div>
+        <div class="hiw-content">
+          <div class="hiw-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="22" height="22"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+          </div>
+          <h3 class="hiw-title">Track your income</h3>
+          <p class="hiw-desc">See what you've earned, what's coming in, and what you're owed — all updated automatically. Finally know exactly what your creator business makes.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section class="features-section reveal" id="features">
+    <div class="features-header">
+      <span class="section-label-accent">Available in early access now</span>
+      <h2 class="section-h2">A working product.<br>Not a coming soon.</h2>
+      <p class="section-p">creos is live and available now. Every feature below is built and ready to use from day one.</p>
+    </div>
+    <div class="features-grid">
+      <div class="fc">
+        <div class="fc-icon ic-y">
+          <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+        </div>
+        <div class="fc-name">Media Kit Page</div>
+        <div class="fc-desc">A live page at yourname.creosapp.com with stats, portfolio, rates, testimonials, audience demographics, and brand fit. Brands can send an inquiry directly from your page.</div>
+      </div>
+      <div class="fc">
+        <div class="fc-icon ic-b">
+          <svg viewBox="0 0 24 24"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/><path d="M9 12h6M9 16h4"/></svg>
+        </div>
+        <div class="fc-name">Client &amp; Deal Pipeline</div>
+        <div class="fc-desc">Track every deal from first message to payment — all in one board. Add notes, deliverables, and due dates so nothing slips through the cracks.</div>
+      </div>
+      <div class="fc">
+        <div class="fc-icon ic-p">
+          <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <div class="fc-name">Brand &amp; Client Contacts</div>
+        <div class="fc-desc">Keep all your brand contacts, managers, and PR reps in one place — each linked to their deals and history. No more digging through DMs to find who you spoke to.</div>
+      </div>
+      <div class="fc">
+        <div class="fc-icon ic-g">
+          <svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+        </div>
+        <div class="fc-name">Revenue Dashboard</div>
+        <div class="fc-desc">See what you've earned, what's still coming in, and what you're owed — updated automatically as deals move through your pipeline. Export to CSV anytime.</div>
+      </div>
+      <div class="fc">
+        <div class="fc-icon ic-t">
+          <svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+        </div>
+        <div class="fc-name">Media Kit Analytics</div>
+        <div class="fc-desc">See how many brands viewed your kit, clicked your links, and actually reached out — so you know what's working and where your best deals are coming from.</div>
+      </div>
+      <div class="fc">
+        <div class="fc-icon ic-o">
+          <svg viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+        </div>
+        <div class="fc-name">Follow-up Reminders</div>
+        <div class="fc-desc">Deals that go quiet get flagged automatically after 7 days. Dashboard alerts and email notifications so you never leave money on the table from a forgotten reply.</div>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:40px;">
+      <a href="/features.html" class="btn btn-outline btn-lg">See all features →</a>
+    </div>
+  </section>
+
+  <!-- INTEGRATIONS -->
+  <section class="integrations-chip-section reveal">
+    <span class="integrations-chip-label">Works with the tools you already use</span>
+    <div class="chips-grid">
+      <div class="chip">
+        <img src="https://cdn.simpleicons.org/gmail" alt="Gmail">
+        <span class="chip-name">Gmail</span>
+      </div>
+      <div class="chip">
+        <img src="https://cdn.simpleicons.org/googledrive" alt="Google Drive">
+        <span class="chip-name">Google Drive</span>
+      </div>
+      <div class="chip">
+        <img src="https://cdn.simpleicons.org/dropbox" alt="Dropbox">
+        <span class="chip-name">Dropbox</span>
+      </div>
+      <div class="chip">
+        <img src="https://cdn.simpleicons.org/stripe" alt="Stripe">
+        <span class="chip-name">Stripe</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section" id="faq" style="max-width:640px;padding-top:0;">
+    <div style="text-align:center;margin-bottom:32px;" class="reveal">
+      <span class="section-label-accent">FAQ</span>
+      <h2 class="section-h2" style="margin-top:8px;">Common questions.</h2>
+    </div>
+    <div class="faq-list reveal">
+      <div class="faq-item">
+        <button class="faq-q">How long does it take to get set up?
+          <svg class="faq-plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </button>
+        <div class="faq-a">Most creators are up and running in under 10 minutes. Add your stats, set your rates, and your live Media Kit link is ready to share with brands straight away. No onboarding calls, no complicated setup.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Is there a free plan?
+          <svg class="faq-plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </button>
+        <div class="faq-a">Yes. creos has a free plan that includes your live Media Kit page, deal tracking, and brand contacts. You can start for free and upgrade to a paid plan as your business grows — no credit card required to get started.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Who is creos built for?
+          <svg class="faq-plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </button>
+        <div class="faq-a">Creators, photographers, videographers, and anyone who gets paid to create. If you're managing brand deals, client work, or partnerships — and doing it through a combination of DMs, PDFs, and spreadsheets — creos was built for you.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">What happens to my data if I cancel?
+          <svg class="faq-plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </button>
+        <div class="faq-a">Your data is yours. You can export your deals, contacts, and revenue to CSV at any time from your settings — before or after cancelling.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <div class="final-cta reveal" id="get-started">
+    <span class="section-label-accent" style="margin-bottom:20px;display:block;">Get started free</span>
+    <h2 class="final-h2">Stop running your<br> business from<br> <em>your DMs.</em></h2>
+    <p class="final-p">Join creators, photographers, and videographers who are done managing brand deals through DMs.</p>
+    <a href="/signup" class="btn btn-lg" style="display:inline-block;margin-bottom:12px;">Get Started Free</a>
+    <p class="form-note">Free to start · No credit card · Cancel anytime</p>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="/" class="footer-logo">creos<span>.</span></a>
+          <div class="footer-social">
+            <a href="https://instagram.com/creosapp" target="_blank" rel="noopener" aria-label="Instagram"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
+            <a href="https://tiktok.com/@creosapp" target="_blank" rel="noopener" aria-label="TikTok"><svg width="15" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.27 6.27 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.71a8.18 8.18 0 004.77 1.52V6.79a4.85 4.85 0 01-1-.1z"/></svg></a>
+          </div>
+        </div>
+        <div class="footer-links">
+          <a href="/features.html">Features</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span class="footer-copy">© 2026 Creos Labs Pty Ltd · creosapp.com</span>
+        <div class="footer-legal">
+          <a href="/privacy.html">Privacy</a>
+          <a href="/terms.html">Terms</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/scripts/main.js"></script>
+</body>
+</html>
