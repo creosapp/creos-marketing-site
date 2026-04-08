@@ -6,7 +6,10 @@
       "Bash(gh auth:*)",
       "Bash(brew install:*)",
       "Bash(xargs sed:*)",
-      "Bash(xargs -0 sed -i '' 's|href=\"\"\"\"/signup\"\"\"\"|href=\"\"\"\"https://app.creosapp.com/signup\"\"\"\"|g')"
+      "Bash(xargs -0 sed -i '' 's|href=\"\"\"\"/signup\"\"\"\"|href=\"\"\"\"https://app.creosapp.com/signup\"\"\"\"|g')",
+      "Bash(npx create-video@latest)",
+      "Bash(npm install:*)",
+      "Bash(npm run:*)"
     ]
   }
 }
